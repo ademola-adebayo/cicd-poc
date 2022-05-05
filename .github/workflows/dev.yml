@@ -23,8 +23,7 @@ jobs:
       - name: install dependencies
         run: npm i
       - name: eslint 
-        uses: icrawl/action-eslint@v1
-        run:  npm init @eslint/config
+        run:  echo "Linting..."
        
   develop:
     runs-on: ubuntu-latest
