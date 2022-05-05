@@ -1,11 +1,10 @@
-name: CICD Workflow
+name: Development CICD Workflow
 
 on: 
   workflow_dispatch:
   push:
     branches:
       - develop
-  pull_request:
 
 jobs:
   lint:
