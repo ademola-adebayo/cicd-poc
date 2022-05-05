@@ -3,7 +3,8 @@ name: CICD Workflow
 on: 
   workflow_dispatch:
   push:
-    - develop
+    branches:
+      - develop
   pull_request:
 
 jobs:
