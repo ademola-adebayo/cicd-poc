@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Approve
         run: echo For security reasons, all pull requests need to be approved first before running any automated CI.
-
+  
   run-shell-command: # Second step
     runs-on: ubuntu-latest
     needs: [approve] # Require the first step to finish
