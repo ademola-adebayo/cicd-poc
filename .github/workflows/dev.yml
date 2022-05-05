@@ -21,8 +21,8 @@ jobs:
         with:
           node-version: 17
       - name: install dependencies
-        run: npm install
-        run: npm install eslint
+        run: npm i
+      - run: npm i eslint
       - name: eslint 
         uses: icrawl/action-eslint@v1
         with:
