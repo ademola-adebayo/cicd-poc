@@ -1,0 +1,45 @@
+name: Production Workflow
+
+on:
+  pull_request_target:
+    branches: [ main ]
+
+jobs:
+  approve: # First step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approve
+        run: echo For security reasons, all pull requests need to be approved first before running any automated CI.
+
+  run-shell-command: # Second step
+    runs-on: ubuntu-latest
+    needs: [approve] # Require the first step to finish
+    environment:
+      name: Integrate Pull Request # Our dummy environment
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+        fetch-depth: 2
+      - name: echo a string 
+        run: echo "Hello World"
+      - name: multiline script 
+        run: |
+          node -v 
+          npm -v
+      - name: python Command
+        run: |
+          import platform
+          print(platform.processor())
+        shell: python
+  run-window-commands:
+    runs-on: windows-latest
+    needs: ["run-shell-command"]
+    steps:
+      - name: Directory Powershell
+        run: Get-Location
+      - name: Directory Bash
+        run: pwd
+        shell: bash
+
+
