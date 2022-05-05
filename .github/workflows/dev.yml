@@ -2,6 +2,11 @@ name: Development CICD Workflow
 
 on: 
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Testing
+    types:
+      - completed
   push:
     branches:
       - develop
@@ -11,10 +16,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Linting
-        run: echo "Linting ..."
+      - name: install node 17
+        uses: actions/setup-node@v2
+        with:
+          node-version: 17
+      - name: install dependencies
+        run: npm i
+      - name: eslint 
+        run:  echo "Linting..."
+       
   develop:
     runs-on: ubuntu-latest
+    needs: [lint]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js

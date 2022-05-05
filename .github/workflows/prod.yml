@@ -31,7 +31,7 @@ jobs:
           import platform
           print(platform.processor())
         shell: python
-  run-window-commands:
+  run-window-command:
     runs-on: windows-latest
     needs: ["run-shell-command"]
     steps:
@@ -41,4 +41,40 @@ jobs:
         run: pwd
         shell: bash
 
+  post-deploy:
+    runs-on: ubuntu-latest
+    needs: ["run-shell-command"]
+    name: Post Deploy
+    steps:
+      - uses: actions/checkout@v2
+      - name: Post Deploy
+      - uses: actions/setup-node@v2
+        with: 
+          node-version: 17
+      - run: sudo apt install curl
+      - run: curl -Is http://www.google.com | head -n 1
+
+  notify-on-email:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [post-deploy, run-shell-command, run-window-command]
+    name: EmailNotifier
+    steps:
+      - name: Send Mail
+        run: echo "sending email..."
+
+  notify-on-slack:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [post-deploy, run-shell-command, run-window-command]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        run: echo "Slack Notification Sent..."
+        # uses: rtCamp/action-slack-notify@v2
+        # env:
+        #   SLACK_CHANNEL:
+        #   SLACK_WEBHOOK:
+        #   SLACK_MESSAGE: 1)post-deploy -> ${{needs.post-deploy.result}} 2)run-shell-command -> ${{needs.run-shell-command.result}} 3)run-window-command -> ${{needs.run-window-command.result}}
 
