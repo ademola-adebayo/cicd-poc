@@ -60,6 +60,7 @@ jobs:
     needs: [post-deploy, run-shell-command, run-window-command]
     name: EmailNotifier
     steps:
+      - uses: actions/checkout@v2
       - name: Send Mail
         run: echo "sending email..."
 
