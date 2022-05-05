@@ -62,6 +62,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Send Mail
+        run: env
 
   notify-on-slack:
     name: Slack Notification
@@ -71,6 +72,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Slack Notification
+        run: env
         # uses: rtCamp/action-slack-notify@v2
         # env:
         #   SLACK_CHANNEL:
