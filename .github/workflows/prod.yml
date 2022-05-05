@@ -54,23 +54,23 @@ jobs:
       - run: sudo apt install curl
       - run: curl -Is http://www.google.com | head -n 1
 
-  notify-on-email:
-    runs-on: ubuntu-latest
-    if: always()
-    needs: [post-deploy, run-shell-command, run-window-command]
-    name: EmailNotifier
-    steps:
-      - uses: actions/checkout@v2
-      - name: Send Mail
+  # notify-on-email:
+  #   runs-on: ubuntu-latest
+  #   if: always()
+  #   needs: [post-deploy, run-shell-command, run-window-command]
+  #   name: EmailNotifier
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Send Mail
 
-  notify-on-slack:
-    name: Slack Notification
-    runs-on: ubuntu-latest
-    if: always()
-    needs: [post-deploy, run-shell-command, run-window-command]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
+  # notify-on-slack:
+  #   name: Slack Notification
+  #   runs-on: ubuntu-latest
+  #   if: always()
+  #   needs: [post-deploy, run-shell-command, run-window-command]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Slack Notification
         # uses: rtCamp/action-slack-notify@v2
         # env:
         #   SLACK_CHANNEL:
