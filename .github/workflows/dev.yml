@@ -22,11 +22,10 @@ jobs:
           node-version: 17
       - name: install dependencies
         run: npm i
-      - run: npm i eslint && npm init @eslint/config
       - name: eslint 
         uses: icrawl/action-eslint@v1
-        with:
-          custom-glob: src
+        run:  npm init @eslint/config
+       
   develop:
     runs-on: ubuntu-latest
     steps:
