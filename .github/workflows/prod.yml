@@ -54,7 +54,7 @@ jobs:
 
   notify-on-email:
     runs-on: ubuntu-latest
-    if: ${{always()}}
+    if: ${{ always() }}
     needs: [post-deploy, run-shell-command, run-window-command]
     name: EmailNotifier
     steps:
