@@ -52,3 +52,23 @@ jobs:
       - name: Post Deploy
         run: env
 
+  notify-on-email:
+    runs-on: ubuntu-latest
+    if: ${{always()}}
+    needs: [post-deploy, run-shell-command, run-window-command]
+    name: EmailNotifier
+    steps:
+      - uses: actions/checkout@v2
+      - name: Send Mail
+        run: env
+
+
+  notify-on-slack:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    if: ${{always()}}
+    needs: [post-deploy, run-shell-command, run-window-command]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        run: env
