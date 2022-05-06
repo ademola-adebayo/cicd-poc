@@ -50,5 +50,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Post Deploy
-        run: env    
+      
+      - uses: actions/setup-node@v2
+        with: 
+          node-version: '17.x'
+      - run: sudo apt install curl
+      - run: curl -Is http://www.google.com | head -n 1    
 
