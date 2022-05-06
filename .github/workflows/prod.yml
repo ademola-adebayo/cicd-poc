@@ -48,8 +48,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Post Deploy
-      - uses: actions/setup-node@v2
-        with: 
-          node-version: 17
-      - run: sudo apt install curl
-      - run: curl -Is http://www.google.com | head -n 1
+        run: env
+
+  notify-on-email:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [post-deploy, run-shell-command, run-window-command]
+    name: EmailNotifier
+    steps:
+      - uses: actions/checkout@v2
+      - name: Send Mail
+
+
+  notify-on-slack:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [post-deploy, run-shell-command, run-window-command]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        
+
