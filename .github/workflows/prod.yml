@@ -61,3 +61,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: Send Mail
         run: env
+
+  notify-on-slack:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs: [post-deploy, run-shell-command, run-window-command]
+    name: SlackNotifier
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        run: env
+        
+        
