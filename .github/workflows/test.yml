@@ -1,0 +1,16 @@
+name: Preflight
+
+on:
+  - pull_request:
+      branches:
+        - test
+  - push:
+      branches:
+        - test
+
+jobs:
+  preflight-job:
+    name: Preflight Step 
+    runs-on: ubuntu-latest
+    steps:
+      - run: env 
