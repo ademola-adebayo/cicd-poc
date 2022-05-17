@@ -40,7 +40,6 @@ jobs:
       - name: Run test
         run: npm test
       
-
       - name: Run Custom Action
         uses: ./.github/actions/custom
         id: query
@@ -51,7 +50,7 @@ jobs:
           run_id: ${{ github.run_id }}
           attempt_number: ${{ github.run_attempt }}
 
-       - name: Spit out outputs
+      - name: Spit out outputs
         run: |
           echo "html_url: ${{ steps.display.outputs.html_url }}"
           echo "Conclusion: ${{ steps.display.outputs.conclusion }}"
