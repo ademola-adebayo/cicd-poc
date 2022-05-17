@@ -7248,18 +7248,18 @@ async function run() {
 
     const { conclusion, status, html_url, created_at } = response;
 
-    const config = {
-      method: "get",
-      url: `https://api.github.com/repos/${{ owner }}/${{
-        repo }}/actions/runs/${{ run_id }}`,
-      headers: {
-        // Authorization: `Bearer ${token}`,
-        // "Content-Type": "application/json",
-        Accept: "application/vnd.github.v3+json",
-      },
-    };
-    const resp = await axios(config);
-    const { data } = resp;
+    // const config = {
+    //   method: "get",
+    //   url: `https://api.github.com/repos/${{ owner }}/${{
+    //     repo }}/actions/runs/${{ run_id }}`,
+    //   headers: {
+    //     // Authorization: `Bearer ${token}`,
+    //     // "Content-Type": "application/json",
+    //     Accept: "application/vnd.github.v3+json",
+    //   },
+    // };
+    // const resp = await axios(config);
+    // const { data } = resp;
 
     console.log("OWNER =>", owner);
     console.log("REPO =>", repo);
@@ -7275,7 +7275,7 @@ async function run() {
     //https://api.github.com/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
     //headers "Accept: application/vnd.github.v3+json"
 
-    console.log("API CALL =>", JSON.stringify(data, null, "\t"));
+    // console.log("API CALL =>", JSON.stringify(data, null, "\t"));
 
     core.setOutput("html_url", html_url);
     core.setOutput("conclusion", conclusion);
