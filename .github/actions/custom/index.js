@@ -39,8 +39,6 @@ async function run() {
       attempt_number,
     });
 
-    const { conclusion, status, html_url, created_at } = response;
-
     const config = {
       method: "get",
       url: `https://api.github.com/repos/${ owner }/${
@@ -53,7 +51,8 @@ async function run() {
     };
     const resp = await axios(config);
     const { data } = resp;
-
+    const  { conclusion, created_at, html_url } = data;
+    
     console.log("OWNER =>", owner);
     console.log("REPO =>", repo);
     console.log("RUN ID =>", run_id);
@@ -73,7 +72,6 @@ async function run() {
     core.setOutput("html_url", html_url);
     core.setOutput("conclusion", conclusion);
     core.setOutput("created_at", created_at);
-    core.setOutput("status", status);
 
     core.startGroup("Logging github");
     console.log(JSON.stringify(github, null, "\t"));
