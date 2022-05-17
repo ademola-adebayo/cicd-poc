@@ -9,7 +9,12 @@ on:
     branches:
       - test
 
-
+permissions:
+  actions: read
+  checks: write
+  contents: read
+  issues: read
+  pull-requests: write
 
 jobs:
   preflight-job:
@@ -34,3 +39,21 @@ jobs:
 
       - name: Run test
         run: npm test
+      
+
+      - name: Run Custom Action
+        uses: ./.github/actions/custom
+        id: query
+        with:
+          token: ${{ secrets.GHA_TOKEN }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          run_id: ${{ github.run_id }}
+          attempt_number: ${{ github.run_attempt }}
+
+       - name: Spit out outputs
+        run: |
+          echo "html_url: ${{ steps.display.outputs.html_url }}"
+          echo "Conclusion: ${{ steps.display.outputs.conclusion }}"
+          echo "completed_at: ${{ steps.display.outputs.created_at }}"
+          echo "started_at: ${{ steps.display.outputs.started_at }}"
