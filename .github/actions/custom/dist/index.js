@@ -7271,7 +7271,8 @@ async function run() {
     // const resp = await axios(config);
     // const { data } = resp;
     // const  { conclusion, created_at, html_url } = data;
-    const  { conclusion, created_at, html_url } = response;
+    const  { data } = response;
+    const  { conclusion, created_at, html_url } = data;
     
     console.log("OWNER =>", owner);
     console.log("REPO =>", repo);
@@ -7296,9 +7297,9 @@ async function run() {
     core.setOutput("html_url", html_url);
     core.setOutput("conclusion", conclusion);
     core.setOutput("created_at", created_at);
-
+    // core.debug(`LOC ${stats?.sloc?.toString() || ''}`)
     core.startGroup("Logging Response");
-    console.log(JSON.stringify(response, null, "\t"));
+    console.log(JSON.stringify(data, null, "\t"));
     core.endGroup();
 
     core.startGroup("Logging github");
