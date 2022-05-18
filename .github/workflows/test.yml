@@ -42,7 +42,7 @@ jobs:
       
       - name: Run Custom Action
         uses: ./.github/actions/custom
-        id: query
+        id: display
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           owner: ${{ github.repository_owner }}
