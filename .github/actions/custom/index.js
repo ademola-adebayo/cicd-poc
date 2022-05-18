@@ -2,6 +2,16 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const axios = require("axios").default;
 
+// const getContents = async () => {
+//   const { data } = await octokit.request({
+//       owner,
+//       repo,
+//       url,
+//       method: 'GET',
+//       path: 'contents', // gets the whole repo
+//   });
+//   console.log(data)
+// }
 
 // const sendGetRequest = async () => {
 //   try {
@@ -12,6 +22,8 @@ const axios = require("axios").default;
 //       console.error(err);
 //   }
 // };
+
+
 async function run() {
   try {
     /**
@@ -39,19 +51,20 @@ async function run() {
       attempt_number,
     });
 
-    const config = {
-      method: "get",
-      url: `https://api.github.com/repos/${ owner }/${
-        repo }/actions/runs/${ run_id }`,
-      headers: {
-        // Authorization: `Bearer ${token}`,
-        // "Content-Type": "application/json",
-        Accept: "application/vnd.github.v3+json",
-      },
-    };
-    const resp = await axios(config);
-    const { data } = resp;
-    const  { conclusion, created_at, html_url } = data;
+    // const config = {
+    //   method: "get",
+    //   url: `https://api.github.com/repos/${ owner }/${
+    //     repo }/actions/runs/${ run_id }`,
+    //   headers: {
+    //     // Authorization: `Bearer ${token}`,
+    //     // "Content-Type": "application/json",
+    //     Accept: "application/vnd.github.v3+json",
+    //   },
+    // };
+    // const resp = await axios(config);
+    // const { data } = resp;
+    // const  { conclusion, created_at, html_url } = data;
+    const  { conclusion, created_at, html_url } = response;
     
     console.log("OWNER =>", owner);
     console.log("REPO =>", repo);
@@ -67,7 +80,7 @@ async function run() {
     //https://api.github.com/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
     //headers "Accept: application/vnd.github.v3+json"
 
-    console.log("API CALL =>", JSON.stringify(data, null, "\t"));
+    // console.log("API CALL =>", JSON.stringify(data, null, "\t"));
 
     console.log("CONCLUSION =>", conclusion);
     console.log("HTML_URL =>", html_url);
