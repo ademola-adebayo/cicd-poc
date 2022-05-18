@@ -1,4 +1,4 @@
-name: Development CICD Workflow
+name: Development-CICD-Workflow
 
 on: 
   workflow_dispatch:
@@ -44,3 +44,13 @@ jobs:
         run: |
           echo Add other actions to build
           echo test, and deploy your project
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true 
+          ref: Preflight
