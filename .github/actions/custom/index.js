@@ -69,6 +69,10 @@ async function run() {
 
     console.log("API CALL =>", JSON.stringify(data, null, "\t"));
 
+    console.log("CONCLUSION =>", conclusion);
+    console.log("HTML_URL =>", html_url);
+    console.log("CREATED_AT =>", created_at);
+    
     core.setOutput("html_url", html_url);
     core.setOutput("conclusion", conclusion);
     core.setOutput("created_at", created_at);
