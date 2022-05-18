@@ -39,7 +39,7 @@ const getContents = async () => {
     repo,
     run_id
   });
-  console.log(data);
+  console.log("GOT THIS BACK", data);
 }
 
 // const sendGetRequest = async () => {
@@ -88,21 +88,17 @@ async function run() {
         run_id }/attempts/${ attempt_number }`
     );
 
-    console.log("LIST THE THING => ", getContents().then((res) => {
-      console.log(res);
-    },(error) => {
-      console.log(error);
-    }));
+    // console.log("LIST THE THING => ", getContents().then((res) => {
+    //   console.log(res);
+    // },(error) => {
+    //   console.log(error);
+    // }));
 
 
     //https://api.github.com/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
     //headers "Accept: application/vnd.github.v3+json"
 
     // console.log("API CALL =>", JSON.stringify(data, null, "\t"));
-
-    console.log("CONCLUSION =>", conclusion);
-    console.log("HTML_URL =>", html_url);
-    console.log("CREATED_AT =>", created_at);
     
     core.setOutput("html_url", html_url);
     core.setOutput("conclusion", conclusion);
