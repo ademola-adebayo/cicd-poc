@@ -88,11 +88,11 @@ async function run() {
         run_id }/attempts/${ attempt_number }`
     );
 
-    console.log("LIST THE THING => ", getContents().then((res) => {
-      console.log(res);
+    getContents().then((res) => {
+      console.log("INSIDE ->",res);
     },(error) => {
-      console.log(error);
-    }));
+      console.log("OUTSIDE ->",error);
+    });
 
 
     //https://api.github.com/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
