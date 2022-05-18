@@ -88,12 +88,7 @@ async function run() {
         run_id }/attempts/${ attempt_number }`
     );
 
-    getContents().then((res) => {
-      console.log("INSIDE ->",res);
-    },(error) => {
-      console.log("OUTSIDE ->",error);
-    });
-
+    getContents();
 
     //https://api.github.com/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
     //headers "Accept: application/vnd.github.v3+json"
