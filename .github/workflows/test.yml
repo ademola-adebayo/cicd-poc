@@ -54,5 +54,5 @@ jobs:
         run: |
           echo "html_url: ${{ steps.display.outputs.html_url }}"
           echo "Conclusion: ${{ steps.display.outputs.conclusion }}"
-          echo "completed_at: ${{ steps.display.outputs.created_at }}"
+          echo "created_at: ${{ steps.display.outputs.created_at }}"
           echo "started_at: ${{ steps.display.outputs.started_at }}"

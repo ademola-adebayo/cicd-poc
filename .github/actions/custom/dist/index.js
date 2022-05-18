@@ -7237,7 +7237,7 @@ async function run() {
      * We will pass the token as an argument to the constructor. This token
      * will be used to authenticate our request.
      */
-    const octokit = new github.getOctokit(token);
+    const octokit =  github.getOctokit(token);
 
     const response = await octokit.rest.actions.getWorkflowRunAttempt({
       owner,
@@ -7283,6 +7283,10 @@ async function run() {
     core.setOutput("html_url", html_url);
     core.setOutput("conclusion", conclusion);
     core.setOutput("created_at", created_at);
+
+    core.startGroup("Logging Response");
+    console.log(JSON.stringify(response, null, "\t"));
+    core.endGroup();
 
     core.startGroup("Logging github");
     console.log(JSON.stringify(github, null, "\t"));
