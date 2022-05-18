@@ -2,6 +2,26 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const axios = require("axios").default;
 
+
+/**
+     * We need to fetch all the inputs that were provided to our action
+     * and store them in variables for us to use.
+     */
+ const owner = core.getInput("owner", { required: true });
+ const repo = core.getInput("repo", { required: true });
+ const run_id = core.getInput("run_id", { required: true });
+ const token = core.getInput("token", { required: true });
+ const attempt_number = core.getInput("attempt_number", { required: true });
+ 
+ /**
+  * Now we need to create an instance of Octokit which will use to call
+  * Github's REST API endpoints.
+  * We will pass the token as an argument to the constructor. This token
+  * will be used to authenticate our request.
+  */
+ const octokit =  github.getOctokit(token);
+
+
 // const getContents = async () => {
 //   const { data } = await octokit.request({
 //       owner,
@@ -10,8 +30,19 @@ const axios = require("axios").default;
 //       method: 'GET',
 //       path: 'contents', // gets the whole repo
 //   });
-//   console.log(data)
+//   console.log(data);
 // }
+
+const getContents = async () => {
+  const { data } = await octokit.rest.actions.listJobsForWorkflowRunAttempt({
+    owner,
+    repo,
+    run_id,
+    attempt_number
+  });
+  console.log(data);
+  return data
+}
 
 // const sendGetRequest = async () => {
 //   try {
@@ -26,24 +57,6 @@ const axios = require("axios").default;
 
 async function run() {
   try {
-    /**
-     * We need to fetch all the inputs that were provided to our action
-     * and store them in variables for us to use.
-     */
-    const owner = core.getInput("owner", { required: true });
-    const repo = core.getInput("repo", { required: true });
-    const run_id = core.getInput("run_id", { required: true });
-    const token = core.getInput("token", { required: true });
-    const attempt_number = core.getInput("attempt_number", { required: true });
-    
-    /**
-     * Now we need to create an instance of Octokit which will use to call
-     * Github's REST API endpoints.
-     * We will pass the token as an argument to the constructor. This token
-     * will be used to authenticate our request.
-     */
-    const octokit =  github.getOctokit(token);
-
     const response = await octokit.rest.actions.getWorkflowRunAttempt({
       owner,
       repo,
@@ -76,6 +89,8 @@ async function run() {
       `https://api.github.com/repos/${ owner }/${ repo }/actions/runs/${
         run_id }/attempts/${ attempt_number }`
     );
+
+    console.log("LIST THE THING => ", getContents())
 
 
     //https://api.github.com/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
