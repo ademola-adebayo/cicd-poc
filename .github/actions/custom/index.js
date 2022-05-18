@@ -40,7 +40,6 @@ const getContents = async () => {
     run_id
   });
   console.log(data);
-  return data
 }
 
 // const sendGetRequest = async () => {
