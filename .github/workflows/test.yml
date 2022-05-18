@@ -51,12 +51,23 @@ jobs:
           attempt_number: ${{ github.run_attempt }}
 
       - name: Spit out outputs
+        id: display-result
         run: |
           echo "html_url: ${{ steps.display.outputs.html_url }}"
           echo "Conclusion: ${{ steps.display.outputs.conclusion }}"
           echo "created_at: ${{ steps.display.outputs.created_at }}"
           echo "started_at: ${{ steps.display.outputs.started_at }}"
+
+      - name: Generate list using Markdown
+        run: |
+          echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+          echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
+          echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
+          echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY
+      
       - name: Generate Info Annotations
+        if: steps.display-result.outcome != 'success'
         run: |
           echo "::warning ::Review needed"
   
