@@ -34,11 +34,10 @@ const axios = require("axios").default;
 // }
 
 const getContents = async () => {
-  const { data } = await octokit.rest.actions.listJobsForWorkflowRunAttempt({
+  const { data } = await octokit.rest.actions.listJobsForWorkflowRun({
     owner,
     repo,
-    run_id,
-    attempt_number
+    run_id
   });
   console.log(data);
   return data
