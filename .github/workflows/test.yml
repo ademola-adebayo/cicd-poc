@@ -56,8 +56,9 @@ jobs:
           echo "Conclusion: ${{ steps.display.outputs.conclusion }}"
           echo "created_at: ${{ steps.display.outputs.created_at }}"
           echo "started_at: ${{ steps.display.outputs.started_at }}"
-      - name: Generate Info Annotations
-        run: |
-          echo "::warning ::Review needed"
+      
+      # - name: Generate Info Annotations
+      #   run: |
+      #     echo "::warning ::Review needed"
   
             
