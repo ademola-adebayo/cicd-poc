@@ -8884,8 +8884,15 @@ const run = async () => {
 
     const { jobs, total_count } = listJobs;
     console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
-    const jobIds = jobs.map(s => s.id);
-    console.log("JOB IDs => ", jobIds);
+    jobs
+    .map(s => s.id)
+    .forEach(async (job_id) => {
+      await octokit.rest.actions.getJobForWorkflowRun({
+        owner,
+        repo,
+        job_id,
+      });
+    })
   } catch (error) {
     core.setFailed(error.message);
   }
