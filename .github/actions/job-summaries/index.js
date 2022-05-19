@@ -33,7 +33,7 @@ const run = async () => {
       ])
       .write()
     });
- 
+    return;
   } catch (error) {
     core.setFailed(error.message);
   }
