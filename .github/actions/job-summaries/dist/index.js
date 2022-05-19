@@ -8876,14 +8876,16 @@ const run = async () => {
 
     const octokit =  github.getOctokit(token);
 
-    const  data  = await octokit.rest.actions.listJobsForWorkflowRun({
+    const  { data: listJobs }  = await octokit.rest.actions.listJobsForWorkflowRun({
       owner,
       repo,
       run_id
     });
 
-    console.log(JSON.stringify(data, null, "\t"));
-    
+    console.log(JSON.stringify(listJobs, null, "\t"));
+    const { jobs, total_count } = listJobs;
+    console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
+    console.log("TOTAL =>", total_count);
   } catch (error) {
     core.setFailed(error.message);
   }
