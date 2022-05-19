@@ -90,6 +90,7 @@ async function run() {
     core.startGroup("Logging github");
     console.log(JSON.stringify(github, null, "\t"));
     core.endGroup();
+    return;
   } catch (error) {
     core.setFailed(error.message);
   }

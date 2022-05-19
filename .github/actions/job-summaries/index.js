@@ -21,7 +21,7 @@ const run = async () => {
     });
 
     console.log(JSON.stringify(data, null, "\t"));
-    return;
+    
   } catch (error) {
     core.setFailed(error.message);
   }

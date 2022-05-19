@@ -67,14 +67,6 @@ jobs:
         run: |
           echo "::warning ::Review needed"
 
-      - name: List Job Summaries for a Workflow Run
-        uses: ./.github/actions/job-summaries
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
-          run_id: ${{ github.run_id }}
-
 
   annotate-pr:
     runs-on: ubuntu-latest
@@ -90,4 +82,18 @@ jobs:
           repo: ${{ github.event.repository.name }}
           pr_number: ${{ github.event.number }}
           token: ${{ secrets.GITHUB_TOKEN }}
+
+  list-jobs:
+    runs-on: ubuntu-latest
+    needs: [annotate-pr]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: List Job Summaries for a Workflow Run
+        uses: ./.github/actions/job-summaries
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          run_id: ${{ github.run_id }}
 

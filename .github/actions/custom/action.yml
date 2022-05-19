@@ -34,5 +34,5 @@ runs:
   using: "node16"
   main: "dist/index.js"
 branding:
-  color: "purple"
-  icon: "clock"
+  color: "blue"
+  icon: "time"
