@@ -1,6 +1,7 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 
+console.log("CORE => ", core);
 const run = async () => {
   try {
     /**
@@ -30,20 +31,6 @@ const run = async () => {
       console.log("STARTED_AT =>", s.started_at);
       console.log("COMPLETED_AT =>", s.completed_at);
     });
-   jobIds.forEach(async (id) => {
-    const { 
-      name, 
-      status, 
-      conclusion, 
-      started_at, 
-      completed_at } = await octokit.rest.actions.getJobForWorkflowRun({
-      owner,
-      repo,
-      id,
-    });
-
-      
-   });
  
   } catch (error) {
     core.setFailed(error.message);
