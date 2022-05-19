@@ -21,7 +21,9 @@ const run = async () => {
     });
 
     console.log(JSON.stringify(listJobs, null, "\t"));
-    
+    const { jobs, total_count } = listJobs;
+    console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
+    console.log("TOTAL =>", total_count);
   } catch (error) {
     core.setFailed(error.message);
   }
