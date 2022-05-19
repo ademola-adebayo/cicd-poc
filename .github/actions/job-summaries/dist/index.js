@@ -8885,7 +8885,13 @@ const run = async () => {
 
     const { jobs } = listJobs;
     console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
-   const jobIds =  jobs.map(s => s.id);
+    jobs.map(s => {
+      console.log("NAME =>", s.name);
+      console.log("STATUS =>", s.status);
+      console.log("CONCLUSION =>", s.conclusion);
+      console.log("STARTED_AT =>", s.started_at);
+      console.log("COMPLETED_AT =>", s.completed_at);
+    });
    jobIds.forEach(async (id) => {
     const { 
       name, 
@@ -8898,11 +8904,7 @@ const run = async () => {
       id,
     });
 
-      console.log("NAME =>", name);
-      console.log("STATUS =>", status);
-      console.log("CONCLUSION =>", conclusion);
-      console.log("STARTED_AT =>", started_at);
-      console.log("COMPLETED_AT =>", completed_at);
+      
    });
  
   } catch (error) {
