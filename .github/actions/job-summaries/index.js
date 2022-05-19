@@ -12,9 +12,9 @@ const run = async () => {
     const run_id = core.getInput("run_id", { required: true });
     const token = core.getInput("token", { required: true });
 
-    const octokit = new github.getOctokit(token);
+    const octokit =  github.getOctokit(token);
 
-    const  data  = octokit.rest.actions.listJobsForWorkflowRun({
+    const  data  = await octokit.rest.actions.listJobsForWorkflowRun({
       owner,
       repo,
       run_id
