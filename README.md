@@ -1,3 +1,3 @@
 ### cicd-poc
-##trying out GHA
+##trying out GHA 2
 # Added some complexities
