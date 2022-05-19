@@ -14,14 +14,14 @@ const run = async () => {
 
     const octokit = new github.getOctokit(token);
 
-    const { data } = octokit.rest.actions.listJobsForWorkflowRun({
+    const  data  = octokit.rest.actions.listJobsForWorkflowRun({
       owner,
       repo,
       run_id
     });
 
     console.log(JSON.stringify(data, null, "\t"));
-
+    return;
   } catch (error) {
     core.setFailed(error.message);
   }
