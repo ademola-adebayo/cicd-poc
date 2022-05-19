@@ -8886,10 +8886,13 @@ const run = async () => {
 
     const { jobs } = listJobs;
     console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
-    jobs.map(async (s) => {
+    jobs.map(async ({name, status, conclusion, started_at, completed_at}) => {
       await core.summary
       .addHeading('Job Summary')
-      .addTable({data: 'Jobs', header: true}, {data: 'Status', header: true})
+      .addTable([
+        [{data: 'Jobs', header: true}, {data: 'Status', header: true}],
+        [name, status]
+      ])
       .write()
     });
  
