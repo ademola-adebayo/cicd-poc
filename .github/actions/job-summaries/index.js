@@ -20,10 +20,10 @@ const run = async () => {
       run_id
     });
 
-    console.log(JSON.stringify(listJobs, null, "\t"));
     const { jobs, total_count } = listJobs;
     console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
-    console.log("TOTAL =>", total_count);
+    const jobIds = jobs.map(s => s.id);
+    console.log("JOB IDs => ", jobIds);
   } catch (error) {
     core.setFailed(error.message);
   }
