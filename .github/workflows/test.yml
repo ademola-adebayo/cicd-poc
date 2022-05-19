@@ -66,7 +66,16 @@ jobs:
         if: steps.display-result.outcome != 'success'
         run: |
           echo "::warning ::Review needed"
-  
+
+      - name: List Job Summaries for a Workflow Run
+        uses: ./.github/actions/job-summaries
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          run_id: ${{ github.run_id }}
+
+
   annotate-pr:
     runs-on: ubuntu-latest
     name: Annotates pull request with metadata
