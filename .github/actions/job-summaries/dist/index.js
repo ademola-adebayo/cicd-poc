@@ -8886,7 +8886,7 @@ const run = async () => {
     const { jobs } = listJobs;
     console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
    const jobIds =  jobs.map(s => s.id);
-   for (const id of jobIds) {
+   jobIds.forEach(async (id) => {
     const { 
       name, 
       status, 
@@ -8903,8 +8903,7 @@ const run = async () => {
       console.log("CONCLUSION =>", conclusion);
       console.log("STARTED_AT =>", started_at);
       console.log("COMPLETED_AT =>", completed_at);
-
-  }
+   });
  
   } catch (error) {
     core.setFailed(error.message);
