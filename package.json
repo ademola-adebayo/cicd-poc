@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
+    "prepare": "ncc build .github/actions/custom/index.js -o .github/actions/custom/dist --source-map",
     "start": "node src",
-    "test": "jest src/app.test.js"
+    "test": "jest src/app.test.js",
+    "all": "npm run lint && npm run prepare && npm run test"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +21,7 @@
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.3",
+    "eslint": "^8.15.0",
     "jest": "^28.0.3",
     "mocha": "^10.0.0",
     "supertest": "^6.2.3"

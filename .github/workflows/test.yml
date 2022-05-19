@@ -3,11 +3,7 @@ name: Preflight
 on:
   workflow_dispatch:
   pull_request:
-    branches:
-      - test
-  push:
-    branches:
-      - test
+    types: [opened, reopened, synchronize]
 
 permissions:
   actions: read
@@ -60,15 +56,28 @@ jobs:
 
       - name: Generate list using Markdown
         run: |
-          echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
+          echo "Run generated at ${{ steps.display.outputs.created_at }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
           echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
           echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
           echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY
       
-      - name: Generate Info Annotations
+    - name: Generate Info Annotations
         if: steps.display-result.outcome != 'success'
         run: |
           echo "::warning ::Review needed"
   
-            
+  annotate-pr:
+    runs-on: ubuntu-latest
+    name: Annotates pull request with metadata
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Annotate PR must work
+        uses: ./.github/actions/pr-metadata
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          pr_number: ${{ github.event.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+

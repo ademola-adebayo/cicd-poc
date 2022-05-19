@@ -7,11 +7,11 @@ const axios = require("axios").default;
      * We need to fetch all the inputs that were provided to our action
      * and store them in variables for us to use.
      */
- const owner = core.getInput("owner", { required: true });
- const repo = core.getInput("repo", { required: true });
- const run_id = core.getInput("run_id", { required: true });
- const token = core.getInput("token", { required: true });
- const attempt_number = core.getInput("attempt_number", { required: true });
+const owner = core.getInput("owner", { required: true });
+const repo = core.getInput("repo", { required: true });
+const run_id = core.getInput("run_id", { required: true });
+const token = core.getInput("token", { required: true });
+const attempt_number = core.getInput("attempt_number", { required: true });
  
  /**
   * Now we need to create an instance of Octokit which will use to call
@@ -19,19 +19,8 @@ const axios = require("axios").default;
   * We will pass the token as an argument to the constructor. This token
   * will be used to authenticate our request.
   */
- const octokit =  github.getOctokit(token);
+const octokit =  github.getOctokit(token);
 
-
-// const getContents = async () => {
-//   const { data } = await octokit.request({
-//       owner,
-//       repo,
-//       url,
-//       method: 'GET',
-//       path: 'contents', // gets the whole repo
-//   });
-//   console.log(data);
-// }
 
 const getContents = async () => {
   const { data } = await octokit.rest.actions.listJobsForWorkflowRun({
@@ -81,10 +70,6 @@ async function run() {
     const  { data } = response;
     const  { conclusion, created_at, html_url } = data;
     
-    console.log("OWNER =>", owner);
-    console.log("REPO =>", repo);
-    console.log("RUN ID =>", run_id);
-    console.log("ATTEMPT NUMBER =>", attempt_number);
     console.log(
       "URL =>",
       `https://api.github.com/repos/${ owner }/${ repo }/actions/runs/${
@@ -93,10 +78,6 @@ async function run() {
 
     getContents();
 
-    //https://api.github.com/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
-    //headers "Accept: application/vnd.github.v3+json"
-
-    // console.log("API CALL =>", JSON.stringify(data, null, "\t"));
     
     core.setOutput("html_url", html_url);
     core.setOutput("conclusion", conclusion);
