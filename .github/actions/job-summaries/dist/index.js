@@ -8890,8 +8890,8 @@ const run = async () => {
       await core.summary
       .addHeading('Job Summary')
       .addTable([
-        [{data: 'Jobs', header: true}, {data: 'Status', header: true}],
-        [name, status]
+        [{data: 'Jobs', header: true}, {data: 'Status', header: true}, {data: 'Started', header: true}, {data: 'Completed', header: true}],
+        [name, status, started_at, completed_at]
       ])
       .write()
     });
