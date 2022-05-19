@@ -1,2 +1,2 @@
 ### cicd-poc
-#tying out GHA
+#trying out GHA
