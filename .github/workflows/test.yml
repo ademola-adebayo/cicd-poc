@@ -62,22 +62,22 @@ jobs:
           echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
           echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY
       
-    - name: Generate Info Annotations
+      - name: Generate Info Annotations
         if: steps.display-result.outcome != 'success'
         run: |
           echo "::warning ::Review needed"
   
-  # annotate-pr:
-  #   runs-on: ubuntu-latest
-  #   name: Annotates pull request with metadata
-  #   steps:
-  #     - uses: actions/checkout@v2
+  annotate-pr:
+    runs-on: ubuntu-latest
+    name: Annotates pull request with metadata
+    steps:
+      - uses: actions/checkout@v2
 
-  #     - name: Annotate PR must work
-  #       uses: ./.github/actions/pr-metadata
-  #       with:
-  #         owner: ${{ github.repository_owner }}
-  #         repo: ${{ github.event.repository.name }}
-  #         pr_number: ${{ github.event.number }}
-  #         token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Annotate PR must work
+        uses: ./.github/actions/pr-metadata
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          pr_number: ${{ github.event.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
