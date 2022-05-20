@@ -23,7 +23,7 @@ const run = async () => {
     });
 
     const { jobs } = listJobs;
-    console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
+    // console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
     jobs.map(async ({name, status, conclusion, started_at, completed_at}) => {
       console.log("NAME => ", name);
       console.log("STATUS => ", status);
