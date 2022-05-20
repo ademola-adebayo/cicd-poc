@@ -8892,13 +8892,17 @@ const run = async () => {
       console.log("CONCLUSION => ", conclusion);
       console.log("STARTED => ", started_at);
       console.log("COMPLETED => ", completed_at);
-      // await core.summary
-      // .addHeading('Job Summary')
-      // .addTable([
-      //   [{data: 'Jobs Name', header: true}, {data: 'Status', header: true}],
-      //   [name, status]
-      // ])
-      // .write()
+      await core.summary
+       .addHeading('Test Results')
+       .addCodeBlock(generateTestResults(), "js")
+       .addTable([
+         [{data: 'File', header: true}, {data: 'Result', header: true}],
+         ['foo.js', 'Pass ✅'],
+         ['bar.js', 'Fail ❌'],
+         ['test.js', 'Pass ✅']
+         ])
+        .addLink('View staging deployment!', 'https://github.com')
+        .write()
     });
     return;
   } catch (error) {
