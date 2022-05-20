@@ -25,13 +25,18 @@ const run = async () => {
     const { jobs } = listJobs;
     console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
     jobs.map(async ({name, status, conclusion, started_at, completed_at}) => {
-      await core.summary
-      .addHeading('Job Summary')
-      .addTable([
-        [{data: 'Jobs Name', header: true}, {data: 'Status', header: true}],
-        [name, status]
-      ])
-      .write()
+      console.log("NAME => ", name);
+      console.log("STATUS => ", status);
+      console.log("CONCLUSION => ", conclusion);
+      console.log("STARTED => ", started_at);
+      console.log("COMPLETED => ", completed_at);
+      // await core.summary
+      // .addHeading('Job Summary')
+      // .addTable([
+      //   [{data: 'Jobs Name', header: true}, {data: 'Status', header: true}],
+      //   [name, status]
+      // ])
+      // .write()
     });
     return;
   } catch (error) {
