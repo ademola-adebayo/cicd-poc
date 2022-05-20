@@ -21,6 +21,7 @@ jobs:
   
   test:
     runs-on: ubuntu-latest
+    name: test
     needs: [preflight-job]
     if: github.ref != 'refs/heads/main'
     steps:
@@ -67,10 +68,9 @@ jobs:
         run: |
           echo "::warning ::Review needed"
 
-
   annotate-pr:
     runs-on: ubuntu-latest
-    name: Annotates pull request with metadata
+    name: Annotator
     needs: [test]
     steps:
       - uses: actions/checkout@v2
@@ -85,6 +85,7 @@ jobs:
 
   list-jobs:
     runs-on: ubuntu-latest
+    name: jobs-details
     needs: [annotate-pr]
     steps:
       - uses: actions/checkout@v2
