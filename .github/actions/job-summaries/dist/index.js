@@ -8886,15 +8886,10 @@ const run = async () => {
 
     const { jobs } = listJobs;
     // console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
-    jobs.map(async ({name, status, conclusion, started_at, completed_at}) => {
-      console.log("NAME => ", name);
-      console.log("STATUS => ", status);
-      console.log("CONCLUSION => ", conclusion);
-      console.log("STARTED => ", started_at);
-      console.log("COMPLETED => ", completed_at);
+    jobs.map(async (s) => {
+     
       await core.summary
        .addHeading('Test Results')
-       .addCodeBlock(generateTestResults(), "js")
        .addTable([
          [{data: 'File', header: true}, {data: 'Result', header: true}],
          ['foo.js', 'Pass ✅'],
