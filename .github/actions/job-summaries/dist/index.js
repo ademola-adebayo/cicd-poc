@@ -8891,10 +8891,10 @@ const run = async () => {
       await core.summary
        .addHeading('Test Results')
        .addTable([
-         [{data: 'File', header: true}, {data: 'Result', header: true}],
-         ['foo.js', 'Pass ✅'],
-         ['bar.js', 'Fail ❌'],
-         ['test.js', 'Pass ✅']
+         [{data: 'Job', header: true}, {data: 'Status', header: true}, {data: 'Started', header: true},{data: 'Concluded', header: true}],
+        //  ['foo.js', 'Pass ✅'],
+        //  ['bar.js', 'Fail ❌'],
+        //  ['test.js', 'Pass ✅']
          ])
         .addLink('View staging deployment!', 'https://github.com')
         .write()

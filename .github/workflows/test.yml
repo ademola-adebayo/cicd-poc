@@ -75,7 +75,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Annotate PR must work
+      - name: Annotate PR
         uses: ./.github/actions/pr-metadata
         with:
           owner: ${{ github.repository_owner }}
