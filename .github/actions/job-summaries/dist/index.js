@@ -8891,8 +8891,8 @@ const run = async () => {
       await core.summary
        .addHeading('Test Results')
        .addTable([
-         [{data: 'Job', header: true}, {data: 'Status', header: true}, {data: 'Started', header: true},{data: 'Concluded', header: true}],
-        //  ['foo.js', 'Pass ✅'],
+         [{data: 'Job', header: true}, {data: 'Status', header: true}, {data: 'Started', header: true},{data: 'Completed', header: true}],
+         [s.name, s.status, s.started_at, s.completed_at],
         //  ['bar.js', 'Fail ❌'],
         //  ['test.js', 'Pass ✅']
          ])

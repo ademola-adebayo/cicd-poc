@@ -33,7 +33,7 @@ const main = async () => {
       pull_number: pr_number,
     });
 
-    console.log(JSON.stringify(changedFiles, null, "\t"));
+    console.log("CHANGED FILES => ",JSON.stringify(changedFiles, null, "\t"));
     /**
      * Contains the sum of all the additions, deletions and changes
      * in all the files in the Pull Request
