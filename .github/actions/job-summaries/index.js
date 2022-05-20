@@ -23,10 +23,11 @@ const run = async () => {
     });
 
     const { jobs } = listJobs;
-    // console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
+    console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
+    console.log("LIST JOBS =>", JSON.stringify(listJobs, null, "\t"));
     jobs.map(async (s) => {
      
-      await core.summary
+     return  await core.summary
        .addHeading('Test Results')
        .addTable([
          [{data: 'Job', header: true}, {data: 'Status', header: true}, {data: 'Started', header: true}],
