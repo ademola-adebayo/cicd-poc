@@ -77,12 +77,10 @@ const run = async () => {
     owner,
     repo,
     issue_number: pr_number,
-    body: `
-      
-       |${ headerItems }   |
-       |-------------------|
-       |   |   |   |   |   |
-      
+    body: ` 
+       |           ${ headerItems }                               |
+       |----------------------------------------------------------|
+       |        |         |        |           |                  |  
     `,
   });
 
