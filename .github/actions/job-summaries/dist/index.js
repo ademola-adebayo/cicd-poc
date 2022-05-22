@@ -8887,22 +8887,19 @@ const run = async () => {
     const { jobs } = listJobs;
     console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
     console.log("LIST JOBS =>", JSON.stringify(listJobs, null, "\t"));
-    jobs.map(async (s) => {
-     
-     return  await core.summary
-       .addHeading('Test Results')
-       .addTable([
-         [{data: 'Job', header: true}, {data: 'Status', header: true}, {data: 'Started', header: true}],
-         [s.name, s.status, s.started_at],
-        //  ['bar.js', 'Fail ❌'],
-        //  ['test.js', 'Pass ✅']
-         ])
-        .addLink('View staging deployment!', 'https://github.com')
-        .write()
-    });
+    
+    await core.summary
+     .addHeading('Test Results')
+     .addTable([
+       [{data: 'Name', header: true}, {data: 'Status ✅', header: true}, {data: 'Started', header: true}, {data: 'Completed', header: true}],
+      //  ['bar.js', 'Fail ❌'],
+      //  ['test.js', 'Pass ✅']
+       ])
+      .addLink('View staging deployment!', 'https://github.com')
+      .write()
     return;
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(` ⚠️ ${error.message} `);
   }
 }
 
