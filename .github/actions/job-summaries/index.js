@@ -33,7 +33,8 @@ const run = async () => {
     // console.log("KEYS => ", keys.splice(8, 5));
     let headerItems = [];
     keys.forEach((key) => {
-      headerItems.push(`<th scope="col">${key}</th>`)
+      // headerItems.push(`<thead scope="col">${key}</thead>`)
+      headerItems.push(`${key}`)
     });
     console.log(headerItems);
 
@@ -77,7 +78,7 @@ const run = async () => {
     issue_number: pr_number,
     body: `
       <table>
-       <th>${headerItems.join(" ")}</th>
+       ${{ headerItems }}
       </table>
     `,
   });
