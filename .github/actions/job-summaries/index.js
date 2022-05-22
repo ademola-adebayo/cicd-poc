@@ -36,6 +36,7 @@ const run = async () => {
       // headerItems.push(`<thead scope="col">${key}</thead>`)
       headerItems.push(`${key}`)
     });
+    headerItems.split(" ")
     console.log(headerItems);
 
     // let bodyItems = [];
