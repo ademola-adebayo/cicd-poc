@@ -66,7 +66,7 @@ jobs:
           echo "| :x: Failed | 121 | 2 | 3 | 10m 3s |" >> $GITHUB_STEP_SUMMARY
           echo "| :green_circle: Pass  | 4 | 12 | 3 | 9m 4s |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
+          echo "[![Preflight Actions Status](https://github.com/ademola-adebayo/cicd-poc/workflows/Preflight/badge.svg)](https://github.com/ademola-adebayo/cicd-poc/actions)" >> $GITHUB_STEP_SUMMARY
           echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
           echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY
       
@@ -117,7 +117,7 @@ jobs:
               repo: context.repo.repo,
               body: 'Deployment succeeded! ✅',
             });  
-            
+
       - name: Message failure
         if: ${{ failure() }}
         uses: actions/github-script@v4

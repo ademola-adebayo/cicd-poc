@@ -36,15 +36,20 @@ const run = async () => {
       // headerItems.push(`<thead scope="col">${key}</thead>`)
       headerItems.push(`${key}`)
     });
+    headerItems.join(" ")
     console.log(headerItems);
 
     let bodyItems = [];
     jobs.forEach((data) => {
       bodyItems.push(`
-        ${data.name}$ {data.status}${data.conclusion}${data.started_at}${data.completed_at}
+        ${data.name}
+        ${data.status}
+        ${data.conclusion}
+        ${data.started_at}
+        ${data.completed_at}
       `)
     });
-
+    bodyItems.join(" ")
     console.log(bodyItems);
     // jobs.forEach((data) => {
     // console.log("BODY DATA => ", data);
@@ -84,9 +89,9 @@ const run = async () => {
     repo,
     issue_number: pr_number,
     body: ` 
-       |        ${ headerItems }               |
-       |        ${ bodyItems   }               |
-    `,
+       ${ headerItems }    
+      ${ bodyItems   }
+    `
   });
 
     // await core.summary
