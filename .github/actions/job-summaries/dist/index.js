@@ -8940,9 +8940,11 @@ const run = async () => {
     repo,
     issue_number: pr_number,
     body: `
-      <table>
-       ${ headerItems }
-      </table>
+      
+       |${ headerItems }   |
+       |-------------------|
+       |   |   |   |   |   |
+      
     `,
   });
 
