@@ -78,9 +78,9 @@ const run = async () => {
     repo,
     issue_number: pr_number,
     body: ` 
-       |           ${ headerItems }                               |
+       |        ${ headerItems }               |
        |----------------------------------------------------------|
-       |        |         |        |           |                  |  
+       |           |          |         |           |             |  
     `,
   });
 
