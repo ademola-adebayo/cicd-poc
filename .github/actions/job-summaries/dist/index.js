@@ -8904,11 +8904,7 @@ const run = async () => {
     let bodyItems = [];
     jobs.forEach((data) => {
       bodyItems.push(`
-        ${data.name}
-        ${data.status}
-        ${data.conclusion}
-        ${data.started_at}
-        ${data.completed_at}
+        ${data.name} ${data.status} ${data.conclusion} ${data.started_at} ${data.completed_at}
       `)
     });
     bodyItems = bodyItems.join(" | ");
