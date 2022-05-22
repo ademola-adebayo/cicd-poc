@@ -2,6 +2,7 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 
 console.log("CORE => ", core);
+console.log("GITHUB => ", github);
 const run = async () => {
   try {
     /**
