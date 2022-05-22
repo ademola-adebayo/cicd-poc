@@ -26,6 +26,50 @@ const run = async () => {
     console.log("JOBS =>", JSON.stringify(jobs, null, "\t"));
     console.log("LIST JOBS =>", JSON.stringify(listJobs, null, "\t"));
     
+    const keys = Object.keys(jobs[0]).splice(8, 5);
+    keys.sort((a, b) => a.length - b.length);
+    console.log("KEYS => ", keys);
+    // console.log("KEYS => ", keys.splice(8, 5));
+    let headerItems = [];
+    keys.forEach((key) => {
+      headerItems.push(`<th scope="col">${key}</th>`)
+    });
+    console.log(headerItems);
+
+    // let bodyItems = [];
+    // jobs.forEach((data) => {
+    // console.log("BODY DATA => ", data);
+    // bodyItems.push(`
+    //  <tr>
+    //    <th data-label="${keys[0]}" scope="row">${data.name}</th>
+    //    <td data-label="${keys[1]}" scope="row">${data.status}</td>
+    //    <td data-label="${keys[2]}" scope="row">${data.conclusion}</td>
+    //    <td data-label="${keys[3]}" scope="row">${data.started_at}</td>
+    //    <td data-label="${keys[4]}" scope="row">${data.completed_at}</td>
+    //    <td data-label="Address">
+    //       <div></div>
+    //       <div></div>
+    //       <div></div>
+    //    </td>
+    //    <td data-label="Phone"></td>
+    //  </tr>
+    // `)
+    // });
+    // console.log("BODY ITEMS => ", bodyItems);
+
+
+  // const table = document.createElement("table");
+  // const tr = document.createElement("tr");
+  // const tbody = document.createElement("tbody");
+    // const table = '';
+    // const tr = '';
+    // const tbody = '';
+
+  //  if(table) {
+  //   tr.innerHTML =  headerItems.join(" ");
+  //   tbody.innerHTML =  bodyItems.join(" ");
+  //  }
+
     await core.summary
      .addHeading('Test Results')
      .addTable([
