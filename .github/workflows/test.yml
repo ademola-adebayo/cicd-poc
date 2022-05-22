@@ -106,3 +106,27 @@ jobs:
           repo: ${{ github.event.repository.name }}
           run_id: ${{ github.run_id }}
 
+      - name: Message success
+        if: ${{ success() }}
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Deployment succeeded! ✅',
+            });  
+            
+      - name: Message failure
+        if: ${{ failure() }}
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Deployment failed! ❌',
+            });     
+
