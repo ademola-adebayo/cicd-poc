@@ -71,15 +71,15 @@ const run = async () => {
   //   tbody.innerHTML =  bodyItems.join(" ");
   //  }
 
-    await core.summary
-     .addHeading('Test Results')
-     .addTable([
-       [{data: 'Name', header: true}, {data: 'Status ✅', header: true}, {data: 'Started', header: true}, {data: 'Completed', header: true}],
-      //  ['bar.js', 'Fail ❌'],
-      //  ['test.js', 'Pass ✅']
-       ])
-      .addLink('View staging deployment!', 'https://github.com')
-      .write()
+    // await core.summary
+    //  .addHeading('Test Results')
+    //  .addTable([
+    //    [{data: 'Name', header: true}, {data: 'Status ✅', header: true}, {data: 'Started', header: true}, {data: 'Completed', header: true}],
+    //   //  ['bar.js', 'Fail ❌'],
+    //   //  ['test.js', 'Pass ✅']
+    //    ])
+    //   .addLink('View staging deployment!', 'https://github.com')
+    //   .write()
     return;
   } catch (error) {
     core.setFailed(` ⚠️ ${error.message} `);
