@@ -8921,8 +8921,8 @@ const run = async () => {
     // console.log("BODY ITEMS => ", bodyItems);
 
 
-  // const table = document.createElement("table");
-  // const tr = document.createElement("tr");
+  //  const table = document.createElement("table");
+  //  const tr = document.createElement("tr");
   // const tbody = document.createElement("tbody");
     // const table = '';
     // const tr = '';
@@ -8932,6 +8932,17 @@ const run = async () => {
   //   tr.innerHTML =  headerItems.join(" ");
   //   tbody.innerHTML =  bodyItems.join(" ");
   //  }
+
+  await octokit.rest.issues.createComment({
+    owner,
+    repo,
+    issue_number: pr_number,
+    body: `
+      <table>
+       <th>${headerItems.join(" ")}</th>
+      </table>
+    `,
+  });
 
     // await core.summary
     //  .addHeading('Test Results')
