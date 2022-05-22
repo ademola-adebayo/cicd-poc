@@ -8941,7 +8941,7 @@ const run = async () => {
     issue_number: pr_number,
     body: `
       <table>
-       ${{ headerItems }}
+       ${ headerItems }
       </table>
     `,
   });
