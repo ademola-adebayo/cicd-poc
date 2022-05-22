@@ -39,7 +39,18 @@ const run = async () => {
     headerItems = headerItems.join(" | ")
     console.log(headerItems);
 
-    // let bodyItems = [];
+    let bodyItems = [];
+    jobs.forEach((data) => {
+      bodyItems.push(`
+        ${data.name}
+        ${data.status}
+        ${data.conclusion}
+        ${data.started_at}
+        ${data.completed_at}
+      `)
+    });
+    bodyItems = bodyItems.join(" | ");
+    console.log(bodyItems);
     // jobs.forEach((data) => {
     // console.log("BODY DATA => ", data);
     // bodyItems.push(`
@@ -57,7 +68,7 @@ const run = async () => {
     //    <td data-label="Phone"></td>
     //  </tr>
     // `)
-    // });
+    //});
     // console.log("BODY ITEMS => ", bodyItems);
 
 
@@ -79,8 +90,7 @@ const run = async () => {
     issue_number: pr_number,
     body: ` 
        |        ${ headerItems }               |
-       |---        | :--      |---------|      --:  |     :-:     |
-       |           |          |         |           |             |  
+       |        ${ bodyItems   }               |
     `,
   });
 
