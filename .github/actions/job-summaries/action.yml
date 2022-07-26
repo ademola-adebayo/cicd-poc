@@ -1,0 +1,21 @@
+name: "Job Summaries Action"
+description: "Adds Job Summaries to workflow"
+inputs:
+  owner:
+    description: "the owner of the repository"
+    required: true
+  repo:
+    description: "The name of the repository"
+    required: true
+  pr_number:
+    description: "The number of the pull request"
+    required: true 
+  run_id:
+    description: "The unique identifier of the workflow run."
+    required: true
+  token:
+    description: "The token to use to access the Github API"
+    required: true
+runs:
+  using: "node16"
+  main: "dist/index.js"

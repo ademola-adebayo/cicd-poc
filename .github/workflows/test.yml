@@ -3,13 +3,14 @@ name: Preflight
 on:
   workflow_dispatch:
   pull_request:
-    branches:
-      - test
-  push:
-    branches:
-      - test
+    types: [opened, reopened, synchronize]
 
-
+permissions:
+  actions: read
+  checks: write
+  contents: read
+  issues: read
+  pull-requests: write
 
 jobs:
   preflight-job:
@@ -20,6 +21,7 @@ jobs:
   
   test:
     runs-on: ubuntu-latest
+    name: test
     needs: [preflight-job]
     if: github.ref != 'refs/heads/main'
     steps:
@@ -34,3 +36,98 @@ jobs:
 
       - name: Run test
         run: npm test
+      
+      - name: Run Custom Action
+        uses: ./.github/actions/custom
+        id: display
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          run_id: ${{ github.run_id }}
+          attempt_number: ${{ github.run_attempt }}
+
+      - name: Spit out outputs
+        id: display-result
+        run: |
+          echo "html_url: ${{ steps.display.outputs.html_url }}"
+          echo "Conclusion: ${{ steps.display.outputs.conclusion }}"
+          echo "created_at: ${{ steps.display.outputs.created_at }}"
+          echo "started_at: ${{ steps.display.outputs.started_at }}"
+      
+      - name: Simple Job Summary
+        run: echo '### Hello world! :rocket:' >> $GITHUB_STEP_SUMMARY
+
+      - name: Generate A Table of test results
+        run: |
+          echo "| Test Result :test_tube: | Passed :green_circle: | Failed :x: | Skipped | Time Duration :alarm_clock: |" >>  $GITHUB_STEP_SUMMARY
+          echo "| ----------- | ------ | ------ | ------- | ------------- |" >> $GITHUB_STEP_SUMMARY
+          echo "| :green_circle: Pass | 122 | 0 | 3 | 12m 3s |" >> $GITHUB_STEP_SUMMARY
+          echo "| :x: Failed | 121 | 2 | 3 | 10m 3s |" >> $GITHUB_STEP_SUMMARY
+          echo "| :green_circle: Pass  | 4 | 12 | 3 | 9m 4s |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "[![Preflight Actions Status](https://github.com/ademola-adebayo/cicd-poc/workflows/Preflight/badge.svg)](https://github.com/ademola-adebayo/cicd-poc/actions)" >> $GITHUB_STEP_SUMMARY
+          echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
+          echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Generate Info Annotations
+        if: steps.display-result.outcome != 'success'
+        run: |
+          echo "::warning ::Review needed"
+
+  annotate-pr:
+    runs-on: ubuntu-latest
+    name: Annotator
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Annotate PR
+        uses: ./.github/actions/pr-metadata
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          pr_number: ${{ github.event.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  list-jobs:
+    runs-on: ubuntu-latest
+    name: jobs-details
+    needs: [annotate-pr]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: List Job Summaries for a Workflow Run
+        uses: ./.github/actions/job-summaries
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          owner: ${{ github.repository_owner }}
+          pr_number: ${{ github.event.number }}
+          repo: ${{ github.event.repository.name }}
+          run_id: ${{ github.run_id }}
+
+      - name: Message success
+        if: ${{ success() }}
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Deployment succeeded! ✅',
+            });  
+
+      - name: Message failure
+        if: ${{ failure() }}
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Deployment failed! ❌',
+            });     
+
