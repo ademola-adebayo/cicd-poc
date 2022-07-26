@@ -55,16 +55,17 @@ jobs:
           echo "created_at: ${{ steps.display.outputs.created_at }}"
           echo "started_at: ${{ steps.display.outputs.started_at }}"
       
-      - name: Simpe lJob Summary
+      - name: Simple Job Summary
         run: echo '### Hello world! :rocket:' >> $GITHUB_STEP_SUMMARY
 
       - name: Generate A Table of test results
         run: |
           echo "| Test Result :test_tube: | Passed :green_circle: | Failed :x: | Skipped | Time Duration :alarm_clock: |" >>  $GITHUB_STEP_SUMMARY
           echo "| ----------- | ------ | ------ | ------- | ------------- |" >> $GITHUB_STEP_SUMMARY
-          echo "| :green_circle: Pass | 122 | $steps.display.outputs.started_at | 3 | 12m 3s |" >> $GITHUB_STEP_SUMMARY
+          echo "| :green_circle: Pass | 122 | 0 | 3 | 12m 3s |" >> $GITHUB_STEP_SUMMARY
           echo "| :x: Failed | 121 | 2 | 3 | 10m 3s |" >> $GITHUB_STEP_SUMMARY
           echo "| :green_circle: Pass  | 4 | 12 | 3 | 9m 4s |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "[![Preflight Actions Status](https://github.com/ademola-adebayo/cicd-poc/workflows/Preflight/badge.svg)](https://github.com/ademola-adebayo/cicd-poc/actions)" >> $GITHUB_STEP_SUMMARY
           echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
